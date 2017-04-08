@@ -18,16 +18,70 @@
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/babel">
       'use strict';
+
+      var prizes = {
+        '46a40b9a' : {
+          title : "Movie Ticket",
+          img : "cineplex.png"
+        },
+        '9b615899' : {
+          title : "Dinner with a friend",
+          img : "restaurant.png"
+        },
+        '223783e2' : {
+          title : "Chocolate Bunny",
+          img : "chocolate-bunny.png"
+        },
+        '6d0d2889' : {
+          title : "Booze",
+          img : "booze"
+        },
+      };
+
       var App = React.createClass({
         getInitialState: function() {
           return {
-              title: ""
+              prize: {
+                title: "",
+                img:""
+              },
+              isSubmitted: false
           };
+        },
+        componentWillMount: function() {
+          var prizeId = window.location.href.toString().split("id=")[1]
+          var prize = prizes[prizeId];
+          if(prize) {
+            this.setState({prize: prize});
+          }
+        },
+        submitForm: function() {
+          $.ajax({
+            type: "POST",
+            url: "https://maker.ifttt.com/trigger/foundegg/with/key/ePqrjk0BMgcKr8jRBEyNU7-oKB3Rta5DOM8-6e76z9K",
+            data: {value1: this.state.prize.title, value2: $("#usr").val(), value3: $("#email").val()},
+            success: function() {
+                this.setState({isSubmitted: true})
+            },
+            dataType: 'json'
+          });
         },
         render: function() {
           return (
             <div className="container-fluid">
               <div className="row">
+                  <p>Your are eligible to win a {this.state.prize.title}</p>
+                  <img src={'https://irenelibby.github.io/images/' + this.state.prize.img}/>
+                  <p>Please enter your full name and email below to enter:</p>
+                  <div className="form-group">
+                    <label>Name:</label>
+                    <input type="text" className="form-control" id="usr" />
+                  </div>
+                  <div className="form-group">
+                    <label>Email:</label>
+                    <input type="email" className="form-control" id="email" />
+                  </div>
+                  <button onClick={this.submitForm}>Submit</button>
               </div>
             </div>
           );
