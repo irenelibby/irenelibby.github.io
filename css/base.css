@@ -1,19 +1,40 @@
 img {
     max-width: 100%;
 }
+body {
+    /*background-color: #000;
+    color: #fff;*/
+    margin-top: 20px;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    margin-bottom: 20px;
+    font-size: 13px;
+}
 
-.title {
-    font-size: 30px;
+p.title {
+   font-weight: bold;
+   font-size: 18px;
+   color: #0074c2;
+}
+
+.content {
+    margin-top: 15px;
+}
+
+
+p.prizeTitle {
+    font-size: 28px;
     font-weight: bold;
     text-align: center;
 }
 
-body {
-    background-color: #000;
-    color: #fff;
-    margin-top: 20px;
+.prizeImg {
+    margin-bottom: 10px;
 }
 
 .btn {
     background-color: #0074c2;
+}
+
+.header span {
+    margin-left: 20px;
 }

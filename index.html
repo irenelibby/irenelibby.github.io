@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Untitled</title>
+    <title>SRCA Easter Egg Hunt 2017</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="css/base.css">
@@ -34,7 +34,7 @@
           img : "chocolate-bunny.png"
         },
         '6d0d2889' : {
-          title : "Booze",
+          title : "Alcohol",
           img : "booze.png"
         },
       };
@@ -47,7 +47,8 @@
                 img:""
               },
               isSubmitted: false,
-              hasError: false
+              hasError: false,
+              user: ''
           };
         },
         componentWillMount: function() {
@@ -64,7 +65,7 @@
             url: "https://maker.ifttt.com/trigger/foundegg/with/key/ePqrjk0BMgcKr8jRBEyNU7-oKB3Rta5DOM8-6e76z9K",
             data: {value1: self.state.prize.title, value2: $("#usr").val(), value3: $("#email").val()},
             success: function() {
-                self.setState({isSubmitted: true})
+                self.setState({isSubmitted: true, user: $("#usr").val()})
             },
             error: function() {
      
@@ -78,28 +79,33 @@
         render: function() {
           var imagePath = "https://irenelibby.github.io/images/"
           return (
-            <div className="page">
-            <div className="header">
-              <img src={imagePath + 'srca-sc-blue.png'}/>
-            </div>
             <div className="container">
-                  <p>If you are 1st to find this egg, you are eligible to win:</p>
-                  <p className="title">{this.state.prize.title}</p>
-                  <img src={imagePath + this.state.prize.img} />
-                  <div className={this.state.isSubmitted || this.state.hasError ? 'hide' : ''}>
-                    <p>Please enter full name & email below to enter:</p>
-                    <div className="form-group">
-                      <label>Name:</label>
-                      <input type="text" className="form-control" id="usr" />
-                    </div>
-                    <div className="form-group">
-                      <label>Email:</label>
-                      <input type="email" className="form-control" id="email" />
-                    </div>
-                    <button className="pull-right btn btn-primary" onClick={this.submitForm}>Submit</button>
+                  <div className="col-xs-4">
+                      <img className="logo" src={imagePath + 'srca-sc-blue.png'}/>
                   </div>
-           
-            </div>
+                  <div className="col-xs-8">
+                        <p className="title">Easter Egg Hunt 2017</p>
+                  </div>
+                  <div className="content col-xs-12">
+                    <p>If you are 1st to find this egg, you are eligible to win:</p>
+                    <p className="prizeTitle">{this.state.prize.title}</p>
+                    <img className="prizeImg" src={imagePath + this.state.prize.img} />
+                    <div className={this.state.isSubmitted || this.state.hasError ? 'hide' : ''}>
+                      <p>Please enter full name & email below to enter:</p>
+                      <div className="form-group">
+                        <label>Name:</label>
+                        <input type="text" className="form-control" id="usr" />
+                      </div>
+                      <div className="form-group">
+                        <label>Email:</label>
+                        <input type="email" className="form-control" id="email" />
+                      </div>
+                      <button className="pull-right btn btn-primary" onClick={this.submitForm}>Submit</button>
+                    </div>
+                    <div className={this.state.isSubmitted ? '' : 'hide'}>
+                        <p>Thank you for entering {this.state.user}, good luck!</p>
+                    </div>
+                  </div>
             </div>
           );
         }
