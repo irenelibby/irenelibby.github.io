@@ -68,7 +68,6 @@
                 self.setState({isSubmitted: true, user: $("#usr").val()})
             },
             error: function() {
-     
               self.setState({hasError: true})
             },
             dataType: 'json'
@@ -103,7 +102,10 @@
                       <button className="pull-right btn btn-primary" onClick={this.submitForm}>Submit</button>
                     </div>
                     <div className={this.state.isSubmitted ? '' : 'hide'}>
-                        <p>Thank you for entering {this.state.user}, good luck!</p>
+                        <p className="thanks">Thank you for entering {this.state.user}, good luck!</p>
+                    </div>
+                    <div className={this.state.hasError ? '' : 'hide'}>
+                        <p className="thanks">An error has occured, your entry was not received!</p>
                     </div>
                   </div>
             </div>

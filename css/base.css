@@ -27,6 +27,11 @@ p.prizeTitle {
     text-align: center;
 }
 
+p.thanks {
+    margin-top: 10px;
+    text-align: center;
+}
+
 .prizeImg {
     margin-bottom: 10px;
 }
