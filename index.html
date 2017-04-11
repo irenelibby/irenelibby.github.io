@@ -64,10 +64,12 @@
             type: "POST",
             url: "https://maker.ifttt.com/trigger/foundegg/with/key/ePqrjk0BMgcKr8jRBEyNU7-oKB3Rta5DOM8-6e76z9K",
             data: {value1: self.state.prize.title, value2: $("#usr").val(), value3: $("#email").val()},
-            success: function() {
+            success: function(e) {
+                console.log("success", e );
                 self.setState({isSubmitted: true, user: $("#usr").val()})
             },
-            error: function() {
+            error: function(e) {
+              console.log("error", e );
               self.setState({hasError: true})
             },
             dataType: 'json'
