@@ -58,6 +58,9 @@
             this.setState({prize: prize});
           }
         },
+        renderSuccess: function() {
+          this.setState({isSubmitted: true, user: $("#usr").val()})
+        },
         submitForm: function() {
           var self = this;
           $.ajax({
@@ -66,12 +69,15 @@
             url: "https://maker.ifttt.com/trigger/foundegg/with/key/ePqrjk0BMgcKr8jRBEyNU7-oKB3Rta5DOM8-6e76z9K",
             data: {value1: self.state.prize.title, value2: $("#usr").val(), value3: $("#email").val()},
             success: function(e) {
-                console.log("success", e );
-                self.setState({isSubmitted: true, user: $("#usr").val()})
+              self.renderSuccess();
             },
             error: function(e) {
-              console.log("error", e );
-              self.setState({hasError: true})
+              if(e.status === 0) {  //hack for CORS, it actually does succeed on IFTTT side
+                self.renderSuccess();
+              }
+              else {
+                self.setState({hasError: true})
+              }
             },
             dataType: 'json'
           });
@@ -105,7 +111,7 @@
                       <button className="pull-right btn btn-primary" onClick={this.submitForm}>Submit</button>
                     </div>
                     <div className={this.state.isSubmitted ? '' : 'hide'}>
-                        <p className="thanks">Thank you for entering {this.state.user}, good luck!</p>
+                        <p className="thanks">Thank you for entering <b>{this.state.user}</b>, good luck!</p>
                     </div>
                     <div className={this.state.hasError ? '' : 'hide'}>
                         <p className="thanks">An error has occured, your entry was not received!</p>
