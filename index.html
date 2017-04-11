@@ -62,6 +62,7 @@
           var self = this;
           $.ajax({
             type: "POST",
+            crossDomain : true,
             url: "https://maker.ifttt.com/trigger/foundegg/with/key/ePqrjk0BMgcKr8jRBEyNU7-oKB3Rta5DOM8-6e76z9K",
             data: {value1: self.state.prize.title, value2: $("#usr").val(), value3: $("#email").val()},
             success: function(e) {
