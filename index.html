@@ -23,21 +23,42 @@
       var prizes = {
         '46a40b9a' : {
           title : "Movie Ticket",
-          img : "cineplex.png"
+          img : "cineplex.png",
+          id: "movie-ticket-1"
+        },
+        'f7606297' : {
+          title : "Movie Ticket",
+          img : "cineplex.png",
+          id: "movie-ticket-2"
+        },
+        '62fe2255' : {
+          title : "Movie Ticket",
+          img : "cineplex.png",
+          id: "movie-ticket-3"
+        },
+        '7b077532' : {
+          title : "Movie Ticket",
+          img : "cineplex.png",
+          id: "movie-ticket-4"
         },
         '9b615899' : {
           title : "Dinner with a friend",
-          img : "restaurant.png"
+          img : "restaurant.png",
+          id: "dinner-1"
         },
         '223783e2' : {
           title : "Chocolate Bunny",
-          img : "chocolate-bunny.png"
+          img : "chocolate-bunny.png",
+          id: "choco-bunny-1"
         },
         '6d0d2889' : {
           title : "Alcohol",
-          img : "booze.png"
+          img : "booze.png",
+          id: "booze-1"
         },
       };
+
+      var prizeKey = "";
 
       var App = React.createClass({
         getInitialState: function() {
@@ -52,8 +73,8 @@
           };
         },
         componentWillMount: function() {
-          var prizeId = window.location.href.toString().split("id=")[1]
-          var prize = prizes[prizeId];
+          prizeKey = window.location.href.toString().split("id=")[1]
+          var prize = prizes[prizeKey];
           if(prize) {
             this.setState({prize: prize});
           }
@@ -67,7 +88,7 @@
             type: "POST",
             crossDomain : true,
             url: "https://maker.ifttt.com/trigger/foundegg/with/key/ePqrjk0BMgcKr8jRBEyNU7-oKB3Rta5DOM8-6e76z9K",
-            data: {value1: self.state.prize.title, value2: $("#usr").val(), value3: $("#email").val()},
+            data: {value1: self.state.prize.id, value2: $("#usr").val(), value3: $("#email").val()},
             success: function(e) {
               self.renderSuccess();
             },
