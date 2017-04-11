@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="css/base.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
     <div id="app">
@@ -45,7 +46,8 @@
                 title: "",
                 img:""
               },
-              isSubmitted: false
+              isSubmitted: false,
+              hasError: false
           };
         },
         componentWillMount: function() {
@@ -56,33 +58,48 @@
           }
         },
         submitForm: function() {
+          var self = this;
           $.ajax({
             type: "POST",
             url: "https://maker.ifttt.com/trigger/foundegg/with/key/ePqrjk0BMgcKr8jRBEyNU7-oKB3Rta5DOM8-6e76z9K",
-            data: {value1: this.state.prize.title, value2: $("#usr").val(), value3: $("#email").val()},
+            data: {value1: self.state.prize.title, value2: $("#usr").val(), value3: $("#email").val()},
             success: function() {
-                this.setState({isSubmitted: true})
+                self.setState({isSubmitted: true})
+            },
+            error: function() {
+     
+              self.setState({hasError: true})
             },
             dataType: 'json'
           });
         },
+
+
         render: function() {
+          var imagePath = "https://irenelibby.github.io/images/"
           return (
-            <div className="container-fluid">
-              <div className="row">
-                  <p>Your are eligible to win a {this.state.prize.title}</p>
-                  <img src={'https://irenelibby.github.io/images/' + this.state.prize.img}/>
-                  <p>Please enter your full name and email below to enter:</p>
-                  <div className="form-group">
-                    <label>Name:</label>
-                    <input type="text" className="form-control" id="usr" />
+            <div className="page">
+            <div className="header">
+              <img src={imagePath + 'srca-sc-blue.png'}/>
+            </div>
+            <div className="container">
+                  <p>If you are 1st to find this egg, you are eligible to win:</p>
+                  <p className="title">{this.state.prize.title}</p>
+                  <img src={imagePath + this.state.prize.img} />
+                  <div className={this.state.isSubmitted || this.state.hasError ? 'hide' : ''}>
+                    <p>Please enter full name & email below to enter:</p>
+                    <div className="form-group">
+                      <label>Name:</label>
+                      <input type="text" className="form-control" id="usr" />
+                    </div>
+                    <div className="form-group">
+                      <label>Email:</label>
+                      <input type="email" className="form-control" id="email" />
+                    </div>
+                    <button className="pull-right btn btn-primary" onClick={this.submitForm}>Submit</button>
                   </div>
-                  <div className="form-group">
-                    <label>Email:</label>
-                    <input type="email" className="form-control" id="email" />
-                  </div>
-                  <button onClick={this.submitForm}>Submit</button>
-              </div>
+           
+            </div>
             </div>
           );
         }
