@@ -24,41 +24,101 @@
         '46a40b9a' : {
           title : "Movie Ticket",
           img : "cineplex.png",
-          id: "movie-ticket-1"
+          id: "blue-movie-ticket-1"
         },
         'f7606297' : {
           title : "Movie Ticket",
           img : "cineplex.png",
-          id: "movie-ticket-2"
+          id: "blue-movie-ticket-2"
         },
         '62fe2255' : {
           title : "Movie Ticket",
           img : "cineplex.png",
-          id: "movie-ticket-3"
+          id: "blue-movie-ticket-3"
         },
         '7b077532' : {
           title : "Movie Ticket",
           img : "cineplex.png",
-          id: "movie-ticket-4"
+          id: "blue-movie-ticket-4"
         },
         '9b615899' : {
-          title : "Dinner with a friend",
+          title : "Lunch with a friend",
           img : "restaurant.png",
-          id: "dinner-1"
+          id: "yellow-lunch-1"
+        },
+        '61f314f2' : {
+          title : "Lunch with a friend",
+          img : "restaurant.png",
+          id: "yellow-lunch-2"
+        },
+        'd2d6a383' : {
+          title : "Lunch with a friend",
+          img : "restaurant.png",
+          id: "yellow-lunch-3"
         },
         '223783e2' : {
-          title : "Chocolate Bunny",
+          title : "Chocolate Treats",
           img : "chocolate-bunny.png",
-          id: "choco-bunny-1"
+          id: "red-choco-treats-1"
+        },
+        '7d0370c5' : {
+          title : "Chocolate Treats",
+          img : "chocolate-bunny.png",
+          id: "red-choco-treats-2"
+        },
+        'cf8346ed' : {
+          title : "Chocolate Treats",
+          img : "chocolate-bunny.png",
+          id: "red-choco-treats-3"
+        },
+        '0244a410' : {
+          title : "Chocolate Treats",
+          img : "chocolate-bunny.png",
+          id: "red-choco-treats-4"
         },
         '6d0d2889' : {
-          title : "Alcohol",
+          title : "Wine",
           img : "booze.png",
-          id: "booze-1"
+          id: "green-booze-1"
         },
+        '4e35c2f5' : {
+          title : "Wine",
+          img : "booze.png",
+          id: "green-booze-2"
+        },
+        'b70fea3b' : {
+          title : "Wine",
+          img : "booze.png",
+          id: "green-booze-3"
+        },
+        '4fd8ac53' : {
+          title : "Wine",
+          img : "booze.png",
+          id: "green-booze-4"
+        }
+        '26405098' : {
+          title : "Snacks Basket",
+          img : "snacks.png",
+          id: "white-snacks-1"
+        },
+        '0fe1a782' : {
+          title : "Snacks Basket",
+          img : "snacks.png",
+          id: "white-snacks-2"
+        },
+        'b64727da' : {
+          title : "Snacks Basket",
+          img : "snacks.png",
+          id: "white-snacks-3"
+        },
+        '95efe8a2' : {
+          title : "Snacks Basket",
+          img : "snacks.png",
+          id: "white-snacks-4"
+        }
       };
 
-      var prizeKey = "";
+      var prizeKey = null;
 
       var App = React.createClass({
         getInitialState: function() {
@@ -83,6 +143,7 @@
           this.setState({isSubmitted: true, user: $("#usr").val()})
         },
         submitForm: function() {
+
           var self = this;
           $.ajax({
             type: "POST",
@@ -106,6 +167,9 @@
 
 
         render: function() {
+          if(!prizeKey) {
+            return <h1>Nothing to see here</h1>;
+          }
           var imagePath = "https://irenelibby.github.io/images/"
           return (
             <div className="container">
