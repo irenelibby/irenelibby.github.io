@@ -180,7 +180,7 @@
                         <p className="title">Easter Egg Hunt 2017</p>
                   </div>
                   <div className="content col-xs-12">
-                    <p>If you are 1st to find this egg, you are eligible to win:</p>
+                    <p>Congratulations, you are eligible to win:</p>
                     <p className="prizeTitle">{this.state.prize.title}</p>
                     <img className="prizeImg" src={imagePath + this.state.prize.img} />
                     <div className={this.state.isSubmitted || this.state.hasError ? 'hide' : ''}>
@@ -196,7 +196,7 @@
                       <button className="pull-right btn btn-primary" onClick={this.submitForm}>Submit</button>
                     </div>
                     <div className={this.state.isSubmitted ? '' : 'hide'}>
-                        <p className="thanks">Thank you for entering <b>{this.state.user}</b>, good luck!</p>
+                        <p className="thanks">Thank you for entering <b>{this.state.user}</b>, please hang on to the NFC keychain to claim your prize, good luck!</p>
                     </div>
                     <div className={this.state.hasError ? '' : 'hide'}>
                         <p className="thanks">An error has occured, your entry was not received!</p>
